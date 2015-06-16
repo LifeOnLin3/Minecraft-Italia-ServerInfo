@@ -1,0 +1,9 @@
+name: MCItalia_ServerInfo
+version: 1.2
+main: me.eduproard.MCItaliaServerInfo.Main
+author: EduProArd
+commands:
+  mcitalia:
+    description: MCItalia commands list!
+  serverl:
+    description: Get informations about your server!
