@@ -14,16 +14,19 @@ import org.json.simple.parser.ParseException;
 
 public class serverlCMD implements CommandExecutor {
 	
+	
+    private String spacer = "Â§4Â§l=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
+	
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("serverl")) {
 			Player p = (Player)sender;
 			if(!p.hasPermission("mcitalia.command.serverl") || !p.hasPermission("mcitalia.command.serverl.position") || !p.hasPermission("mcitalia.command.serverl.votes") || !p.hasPermission("mcitalia.command.serverl.votestoday") || !p.hasPermission("mcitalia.command.serverl.allinfo") || !p.hasPermission("mcitalia.command.serverl.getserver")) {
-				p.sendMessage(MCConfig.getInstance().getData().getString("No-Permission").replaceAll("&", "§"));
+				p.sendMessage(MCConfig.getInstance().getData().getString("No-Permission").replaceAll("&", "Â§"));
 				return false;
 			}
 			if(p.hasPermission(new Permission("mcitalia.command.serverl", PermissionDefault.OP))) {
 				if(args.length == 0 || args.length >= 3) {
-			         p.sendMessage(Main.getPrefix() + "§4La sintassi corretta e': /serverl <allinfo/position/votes/votes_today/getserver <serverName/ID>>!");
+			         p.sendMessage(Main.getPrefix() + "Â§4La sintassi corretta e': /serverl <allinfo/position/votes/votes_today/getserver <serverName/ID>>!");
 			         return false;
 				}
 			}
@@ -38,9 +41,9 @@ public class serverlCMD implements CommandExecutor {
 							try {
 								position = JSONReader.getPosition(MCConfig.getInstance().getData().getString("ServerName"));
 							} catch (ParseException e) {
-								p.sendMessage(Main.getPrefix() + " §4Si e' verificato un problema! {ParseException}");
+								p.sendMessage(Main.getPrefix() + " Â§4Si e' verificato un problema! {ParseException}");
 							}
-							p.sendMessage(Main.getPrefix() + "§2La posizione di " + MCConfig.getInstance().getData().getString("ServerName") + " sulla lista servers di Minecraft-Italia e' §2§l" + position + "§r§2!");
+							p.sendMessage(Main.getPrefix() + "Â§2La posizione di " + MCConfig.getInstance().getData().getString("ServerName") + " sulla lista servers di Minecraft-Italia e' Â§2Â§l" + position + "Â§rÂ§2!");
 						}
 					}
 					if((p.hasPermission(new Permission("mcitalia.command.serverl.votes", PermissionDefault.OP)))) {
@@ -48,10 +51,10 @@ public class serverlCMD implements CommandExecutor {
 							try {
 								votes = JSONReader.getVotes(MCConfig.getInstance().getData().getString("ServerName"));
 							} catch (ParseException e) {
-								p.sendMessage(Main.getPrefix() + " §4Si e' verificato un problema! {ParseException}");
+								p.sendMessage(Main.getPrefix() + " Â§4Si e' verificato un problema! {ParseException}");
 							}
-							p.sendMessage(Main.getPrefix() + "§2" + MCConfig.getInstance().getData().getString("ServerName") + " sulla lista servers di Minecraft-Italia");
-							p.sendMessage("§2ha §2§l" + votes + " §r§2voti in totale!");
+							p.sendMessage(Main.getPrefix() + "Â§2" + MCConfig.getInstance().getData().getString("ServerName") + " sulla lista servers di Minecraft-Italia");
+							p.sendMessage("Â§2ha Â§2Â§l" + votes + " Â§rÂ§2voti in totale!");
 						}
 					}
 					if((p.hasPermission(new Permission("mcitalia.command.serverl.votestoday", PermissionDefault.OP)))) {
@@ -59,10 +62,10 @@ public class serverlCMD implements CommandExecutor {
 							try {
 								votes_today = JSONReader.getVotes_Today(MCConfig.getInstance().getData().getString("ServerName"));
 							} catch (ParseException e) {
-								p.sendMessage(Main.getPrefix() + " §4Si e' verificato un problema! {ParseException}");
+								p.sendMessage(Main.getPrefix() + " Â§4Si e' verificato un problema! {ParseException}");
 							}
-							p.sendMessage(Main.getPrefix() + "§2" + MCConfig.getInstance().getData().getString("ServerName") + " sulla lista servers di Minecraft-Italia");
-							p.sendMessage("§2oggi ha §2§l" + votes_today + " §r§2voti in totale!");
+							p.sendMessage(Main.getPrefix() + "Â§2" + MCConfig.getInstance().getData().getString("ServerName") + " sulla lista servers di Minecraft-Italia");
+							p.sendMessage("Â§2oggi ha Â§2Â§l" + votes_today + " Â§rÂ§2voti in totale!");
 						}
 					}
 					if((p.hasPermission(new Permission("mcitalia.command.serverl.allinfo", PermissionDefault.OP)))) {
@@ -72,18 +75,18 @@ public class serverlCMD implements CommandExecutor {
 								votes = JSONReader.getVotes(MCConfig.getInstance().getData().getString("ServerName"));
 								votes_today = JSONReader.getVotes_Today(MCConfig.getInstance().getData().getString("ServerName"));
 							} catch (ParseException e) {
-								p.sendMessage(Main.getPrefix() + " §4Si e' verificato un problema! {ParseException}");
+								p.sendMessage(Main.getPrefix() + " Â§4Si e' verificato un problema! {ParseException}");
 							}
-							p.sendMessage("§4§l=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-							p.sendMessage(Main.getPrefix() + "§2Le informazioni riguardo " + MCConfig.getInstance().getData().getString("ServerName") + " sono:");
-							p.sendMessage(" §bPosizione: §3" + position);
-							p.sendMessage(" §bVoti(in totale): §3" + votes);
-							p.sendMessage(" §bVoti(oggi): §3" + votes_today);
-							p.sendMessage("§4§l=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+							p.sendMessage(spacer);
+							p.sendMessage(Main.getPrefix() + "Â§2Le informazioni riguardo " + MCConfig.getInstance().getData().getString("ServerName") + " sono:");
+							p.sendMessage(" Â§bPosizione: Â§3" + position);
+							p.sendMessage(" Â§bVoti(in totale): Â§3" + votes);
+							p.sendMessage(" Â§bVoti(oggi): Â§3" + votes_today);
+							p.sendMessage(spacer);
 						}
 					}
 				} else {
-					p.sendMessage(Main.getPrefix() + "§4" + MCConfig.getInstance().getData().getString("ServerName") + " non esiste sulla lista servers!");
+					p.sendMessage(Main.getPrefix() + "Â§4" + MCConfig.getInstance().getData().getString("ServerName") + " non esiste sulla lista servers!");
 				}
 				return false;
 			}
@@ -98,18 +101,18 @@ public class serverlCMD implements CommandExecutor {
 								votes = JSONReader.getVotes(server);
 								votes_today = JSONReader.getVotes_Today(server);
 							} catch (ParseException e) {
-								p.sendMessage(Main.getPrefix() + " §4Si e' verificato un problema! {ParseException}");
+								p.sendMessage(Main.getPrefix() + " Â§4Si e' verificato un problema! {ParseException}");
 							}
-							p.sendMessage("§4§l=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-							p.sendMessage(Main.getPrefix() + "§2Le informazioni riguardo " + server + " sono:");
-							p.sendMessage(" §bPosizione: §3" + position);
-							p.sendMessage(" §bVoti(in totale): §3" + votes);
-							p.sendMessage(" §bVoti(oggi): §3" + votes_today);
-							p.sendMessage("§4§l=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+							p.sendMessage(spacer);
+							p.sendMessage(Main.getPrefix() + "Â§2Le informazioni riguardo " + server + " sono:");
+							p.sendMessage(" Â§bPosizione: Â§3" + position);
+							p.sendMessage(" Â§bVoti(in totale): Â§3" + votes);
+							p.sendMessage(" Â§bVoti(oggi): Â§3" + votes_today);
+							p.sendMessage(spacer);
 						}
 					}
 				} else {
-					p.sendMessage(Main.getPrefix() + "§4" + server + " non esiste sulla lista servers!");
+					p.sendMessage(Main.getPrefix() + "Â§4" + server + " non esiste sulla lista servers!");
 				}
 				return false;
 			}
